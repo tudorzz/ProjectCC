@@ -1,0 +1,23 @@
+# Use the Nginx image
+FROM nginx:alpine
+
+# Copy the static HTML file
+COPY index.html /usr/share/nginx/html/index.html
+
+# Copy the JavaScript file
+COPY script.js /usr/share/nginx/html/script.js
+
+# Copy the Bootstrap and jQuery files if you have them in your local directory
+# Make sure the directories align with what's specified in the HTML
+COPY sources/bootstrap-4.5.2-dist/css/bootstrap.css /usr/share/nginx/html/sources/bootstrap-4.5.2-dist/css/bootstrap.css
+COPY sources/bootstrap-4.5.2-dist/js/jquery-3.5.1.js /usr/share/nginx/html/sources/bootstrap-4.5.2-dist/js/jquery-3.5.1.js
+COPY sources/bootstrap-4.5.2-dist/js/bootstrap.js /usr/share/nginx/html/sources/bootstrap-4.5.2-dist/js/bootstrap.js
+
+# If you have any additional CSS files, copy them as well
+# COPY style.css /usr/share/nginx/html/style.css
+
+# Expose port 80 for the web server
+EXPOSE 80
+
+# Command to run the server
+CMD ["nginx", "-g", "daemon off;"]
